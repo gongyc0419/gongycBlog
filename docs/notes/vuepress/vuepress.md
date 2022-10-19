@@ -328,7 +328,10 @@ git commit -m 'deploy'
 
 6. 提交到远程仓库
 ```bash
-git push -f git@github.com:<USERNAME>/<USERNAME> master
+//关联远程仓库
+git remote add origin git@github.com:gongyc0419/gongycBlog
+//推送到远程仓库的master分支
+git push -u origin master
 ```
 
 7. 开启 Github Pages 服务
