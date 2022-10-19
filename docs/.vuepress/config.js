@@ -42,7 +42,7 @@ module.exports = {
         sidebarDepth: 2,
         
         // 导航栏显示 github 仓库
-        repo: 'gongyc0419/my-notes.github.io',
+        repo: 'gongyc0419/gongycBlog',
         repoLabel: '查看源码',
 
         // 以下为可选的编辑链接选项

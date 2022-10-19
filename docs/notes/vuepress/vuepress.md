@@ -302,7 +302,9 @@ style={ { key: value } }
 
 ```js
 module.exports = {
-  // 仓库名为 gongycBlog
+  // 仓库名为 gongycBlog！！！！
+  // 这里有坑！如果base设置成了/gongycBlog/，那仓库名必须为gongycBlog
+  //否则打包后，会找不到样式路径
   base: '/gongycBlog/',
 }
 ```
@@ -313,12 +315,10 @@ module.exports = {
 yarn docs:build
 ```
 
-3. 打包完成后，会生成 dist 文件夹，进入该文件夹
-```bash
-cd docs/.vuepress/dist
-```
+3. 打包完成后，会在docs/.vuepress文件夹中生成 dist 文件夹
 
-4. 初始化 git，并添加暂存区，提交本地库
+4. 将dist文件夹下生成的内容拷贝到根目录下，即/gongycBlog/中
+5. 在根目录中初始化git，并添加文件到git仓库
 
 ```bash
 git init
@@ -326,21 +326,15 @@ git add -A
 git commit -m 'deploy'
 ```
 
-5. 为远程仓库起别名
-
+6. 提交到远程仓库
 ```bash
-git remote add origin https://github.com/gongyc0419/gongycBlog
-```
-6. 拉取远程仓库分支，与本地分支合并
-   额外创建了一个分支，master 分支保存原始的 markdown 文档，pages分支则用于上传打包后的文件，并使用 pages 分支部署 Github Pages。
-```bash
-git pull origin pages
+git push -f git@github.com:<USERNAME>/<USERNAME> master
 ```
 
-7. 选择部署分支，并开启 Github Pages 服务
-```bash
-git push origin master:pages
-```
+7. 开启 Github Pages 服务
+
+在settings下找到pages，开启Github Pages 服务
+
 
 至此，gongycBlog 的搭建完成！:tada::smile:
 
@@ -348,8 +342,8 @@ git push origin master:pages
 
 > VuePress 每次打包生成的 dist 都不相同，因此尽量有比较大改动时才更新网站，这不像 docsify 那么方便自由
 
-- 本地拷贝一份 `.git` 文件夹备用，删除旧的 `dist` 文件夹
-- 重新打包生成新的 `dist` 文件夹
-- 把备用 `.git` 文件夹拷贝到新的 `dist` 文件夹中
+- 删除旧的 `dist` 文件夹
+- 重新build新的 `dist` 文件夹
+- 把`dist`文件夹中的内容拷贝到根目录
 - 将修改添加暂存区，提交本地库，并推送到远程分支
 - 如此，既能更新远程 `pages` 分支内容，也能同步 git 的历史操作记录
